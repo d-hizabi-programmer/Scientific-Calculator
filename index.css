@@ -43,6 +43,7 @@ header h1 {
   margin-top: 2em;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  row-gap: 1.5em;
 }
 /* btn class for button styling */
 .btn {
@@ -53,12 +54,16 @@ header h1 {
   font-size: 1.5em;
   margin: auto;
 }
-#pie {
+.saffron {
   background-color: #ff9933;
 }
 
-#mod {
+.pink {
   background-color: #ff4561;
+}
+
+.black {
+  background-color: black;
 }
 /* footer  */
 footer {
