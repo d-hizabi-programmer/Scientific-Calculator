@@ -38,7 +38,30 @@ header h1 {
   font-size: 1.5em;
 }
 
+/* button containing area */
+.buttonsArea {
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+/* btn class for button styling */
+.btn {
+  height: 35px;
+  width: 70px;
+  background-color: #6f6f6f;
+  color: white;
+  font-size: 1.5em;
+  margin: auto;
+}
+#pie {
+  background-color: #ff9933;
+}
+
+#mod {
+  background-color: #ff4561;
+}
 /* footer  */
 footer {
+  margin: 0.5em;
   text-align: center;
 }
