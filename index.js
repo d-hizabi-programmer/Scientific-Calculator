@@ -113,7 +113,7 @@ $(document).ready(function () {
     inputValues(evt, ")");
   });
 
-  //cos cick event
+  //cos click event
   $("#cos").on("click", (evt) => {
     evt.preventDefault();
     currentValue = $("#display").val();
@@ -121,16 +121,35 @@ $(document).ready(function () {
     $("#display").val(newValue);
   });
 
+  //sin click event
   $("#sin").on("click", (evt) => {
     evt.preventDefault();
     currentValue = $("#display").val();
     newValue = Math.sin(currentValue);
     $("#display").val(newValue);
   });
+
+  //tan click event
   $("#tan").on("click", (evt) => {
     evt.preventDefault();
     currentValue = $("#display").val();
     newValue = Math.tan(currentValue);
+    $("#display").val(newValue);
+  });
+
+  //square  click event
+  $("#square").on("click", (evt) => {
+    evt.preventDefault();
+    currentValue = $("#display").val();
+    newValue = Math.pow(currentValue, 2);
+    $("#display").val(newValue);
+  });
+
+  //square root click event
+  $("#sqrt").on("click", (evt) => {
+    evt.preventDefault();
+    currentValue = $("#display").val();
+    newValue = Math.sqrt(currentValue, 2);
     $("#display").val(newValue);
   });
 });
