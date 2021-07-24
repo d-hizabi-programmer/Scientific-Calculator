@@ -6,6 +6,7 @@ function clearEntries(evt) {
 
 //values click event handler
 function inputValues(evt, number) {
+  var newValue;
   var currentValue = $("#display").val();
   evt.preventDefault();
 
@@ -18,7 +19,18 @@ function inputValues(evt, number) {
       $("#display").val(number);
     }
   } else {
-    var newValue = currentValue + number;
+    //for toggling negative number
+    if (number == "-") {
+      if (currentValue[0] == "-") {
+        newValue = currentValue.slice(1);
+        console.log("newVla" + newValue);
+      } else {
+        newValue = "-" + currentValue;
+        console.log("new val" + newValue + "\n current val:" + currentValue);
+      }
+    } else {
+      newValue = currentValue + number;
+    }
     $("#display").val(newValue);
   }
   console.log("Value added succesfully!");
@@ -84,5 +96,20 @@ $(document).ready(function () {
   //numer . (decimal)click event
   $("#decimal").on("click", (evt) => {
     inputValues(evt, ".");
+  });
+
+  // - click event
+  $("#negative").on("click", (evt) => {
+    inputValues(evt, "-");
+  });
+
+  //opening bracket
+  $("#openingBrace").on("click", (evt) => {
+    inputValues(evt, "(");
+  });
+
+  //closing brace
+  $("#closingBrace").on("click", (evt) => {
+    inputValues(evt, ")");
   });
 });
