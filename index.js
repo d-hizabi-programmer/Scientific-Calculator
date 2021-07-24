@@ -41,6 +41,7 @@ function inputValues(evt, number) {
         newValue = currentValue.slice(1);
         console.log("newVla" + newValue);
       } else {
+        // console.length("inn else part");
         newValue = "-" + currentValue;
         console.log("new val" + newValue + "\n current val:" + currentValue);
       }
@@ -141,7 +142,11 @@ $(document).ready(function () {
 
   //closing brace
   $("#closingBrace").on("click", (evt) => {
-    inputValues(evt, ")");
+    evt.preventDefault();
+    currentValue = $("#display").val();
+    if (currentValue.includes("(")) {
+      inputValues(evt, ")");
+    }
   });
 
   //cos click event
@@ -187,8 +192,10 @@ $(document).ready(function () {
   //log (ln) click event
   $("#log").on("click", (evt) => {
     evt.preventDefault();
+    //console.log("log function");
     currentValue = $("#display").val();
-    newValue = Math.log(currentValue, 2);
+
+    newValue = Math.log(currentValue);
     $("#display").val(newValue);
   });
 
@@ -221,8 +228,12 @@ $(document).ready(function () {
   $("#subtraction").on("click", (evt) => {
     evt.preventDefault();
     currentValue = $("#display").val();
-    newValue = currentValue + "-";
-    $("#display").val(newValue);
+    if (currentValue.slice(-1) == "-") {
+      // if user tries to enter 5-- then, this wont allow to evaluate eexpression untill user adds next operand
+    } else {
+      newValue = currentValue + "-";
+      $("#display").val(newValue);
+    }
   });
 
   //mulitplication click event
@@ -268,8 +279,9 @@ $(document).ready(function () {
     ) {
       // e.g, if user enters 5* means user is not entering another operand, identiclly it should contain operand1 operator operand 2.
       // then, this block wont perform any operation and console wont genrate error!
+      computedValue = currentValue;
     } else if ($("#display").val().includes("%")) {
-      console.log("String contains %.");
+      // console.log("String contains %.");
       var arr = $("#display").val().split("%");
       console.log("String contains %." + arr);
       var op1 = arr[0];
