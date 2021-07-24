@@ -8,8 +8,15 @@ function clearEntries(evt) {
 function inputValues(evt, number) {
   var currentValue = $("#display").val();
   evt.preventDefault();
-  if (currentValue == 0) {
-    $("#display").val(number);
+
+  // fir first number typed in textbox, it shoud remove default value zero.
+  if (currentValue == 0 && currentValue.length == 1) {
+    if (currentValue == 0 && number == ".") {
+      $("#display").val("0.");
+      console.log(". Added!");
+    } else {
+      $("#display").val(number);
+    }
   } else {
     var newValue = currentValue + number;
     $("#display").val(newValue);
@@ -23,6 +30,16 @@ $(document).ready(function () {
   //for clearing entries
   $("#clear").on("click", clearEntries);
   console.log("Value is:" + $("#display").val());
+
+  //numer 0 click event
+  $("#numZero").on("click", (evt) => {
+    inputValues(evt, 0);
+  });
+
+  //numer 1 click event
+  $("#numOne").on("click", (evt) => {
+    inputValues(evt, 1);
+  });
 
   //numer 2 click event
   $("#numTwo").on("click", (evt) => {
@@ -62,5 +79,10 @@ $(document).ready(function () {
   //numer 9 click event
   $("#numNine").on("click", (evt) => {
     inputValues(evt, 9);
+  });
+
+  //numer . (decimal)click event
+  $("#decimal").on("click", (evt) => {
+    inputValues(evt, ".");
   });
 });
