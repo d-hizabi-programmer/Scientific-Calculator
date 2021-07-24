@@ -1,3 +1,5 @@
+var currentValue, newValue;
+
 function clearEntries(evt) {
   $("#display").val("0");
   console.log("Entries Cleared!");
@@ -6,8 +8,7 @@ function clearEntries(evt) {
 
 //values click event handler
 function inputValues(evt, number) {
-  var newValue;
-  var currentValue = $("#display").val();
+  currentValue = $("#display").val();
   evt.preventDefault();
 
   // fir first number typed in textbox, it shoud remove default value zero.
@@ -171,6 +172,51 @@ $(document).ready(function () {
 
   //pi value will b shown in textbox
   $("#pi").on("click", (evt) => {
-    inputValues(evt, "3.14159265359");
+    evt.preventDefault();
+    if ($("#display").val() == 0 || $("#display").val().length == 0) {
+      newValue = 3.14159265359;
+    } else {
+      currentValue = parseFloat($("#display").val());
+      newValue = currentValue * 3.14159265359;
+    }
+    $("#display").val(newValue.toFixed(8));
+  });
+
+  //addition click event
+  $("#addition").on("click", (evt) => {
+    inputValues(evt, "+");
+  });
+
+  //subtraction click event
+  $("#subtraction").on("click", (evt) => {
+    evt.preventDefault();
+    currentValue = $("#display").val();
+    newValue = currentValue + "-";
+    $("#display").val(newValue);
+  });
+
+  //mulitplication click event
+  $("#multiplication").on("click", (evt) => {
+    inputValues(evt, "*");
+  });
+
+  //division click event
+  $("#division").on("click", (evt) => {
+    inputValues(evt, "/");
+  });
+
+  //percentage click event
+  // $("#percent").on("click", (evt) => {
+  //   evt.preventDefault();
+  //   currentValue = $("#display").val();
+  //   newValue = currentValue;
+  //   $("#display").val(newValue);
+  // });
+
+  // equal to button click event
+  $("#equal").on("click", (evt) => {
+    evt.preventDefault();
+    var computedValue = eval($("#display").val());
+    $("#display").val(computedValue);
   });
 });
