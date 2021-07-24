@@ -152,4 +152,25 @@ $(document).ready(function () {
     newValue = Math.sqrt(currentValue, 2);
     $("#display").val(newValue);
   });
+
+  //log (ln) click event
+  $("#log").on("click", (evt) => {
+    evt.preventDefault();
+    currentValue = $("#display").val();
+    newValue = Math.log(currentValue, 2);
+    $("#display").val(newValue);
+  });
+
+  // e/exponent/x^  click event
+  $("#exp").on("click", (evt) => {
+    evt.preventDefault();
+    currentValue = $("#display").val();
+    newValue = Math.exp(currentValue, 2);
+    $("#display").val(newValue);
+  });
+
+  //pi value will b shown in textbox
+  $("#pi").on("click", (evt) => {
+    inputValues(evt, "3.14159265359");
+  });
 });
