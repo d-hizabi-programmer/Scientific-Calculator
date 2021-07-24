@@ -112,4 +112,25 @@ $(document).ready(function () {
   $("#closingBrace").on("click", (evt) => {
     inputValues(evt, ")");
   });
+
+  //cos cick event
+  $("#cos").on("click", (evt) => {
+    evt.preventDefault();
+    currentValue = $("#display").val();
+    newValue = Math.cos(currentValue);
+    $("#display").val(newValue);
+  });
+
+  $("#sin").on("click", (evt) => {
+    evt.preventDefault();
+    currentValue = $("#display").val();
+    newValue = Math.sin(currentValue);
+    $("#display").val(newValue);
+  });
+  $("#tan").on("click", (evt) => {
+    evt.preventDefault();
+    currentValue = $("#display").val();
+    newValue = Math.tan(currentValue);
+    $("#display").val(newValue);
+  });
 });
