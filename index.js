@@ -205,6 +205,20 @@ $(document).ready(function () {
     inputValues(evt, "/");
   });
 
+  //backspace click event
+  $("#backSpace").on("click", (evt) => {
+    evt.preventDefault();
+    console.log("inside backspace!");
+    currentValue = $("#display").val();
+    newValue = currentValue.slice(0, currentValue.length - 1);
+    if (newValue.length == 0) {
+      $("#display").val("0");
+    } else {
+      console.log("newval:" + newValue);
+      $("#display").val(newValue);
+    }
+  });
+
   //percentage click event
   // $("#percent").on("click", (evt) => {
   //   evt.preventDefault();
