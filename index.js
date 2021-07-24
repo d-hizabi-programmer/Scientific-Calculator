@@ -9,6 +9,7 @@ function clearEntries(evt) {
 //values click event handler
 function inputValues(evt, number) {
   currentValue = $("#display").val();
+  // console.length("current val:" + currentValue);
   evt.preventDefault();
 
   // fir first number typed in textbox, it shoud remove default value zero.
@@ -16,12 +17,26 @@ function inputValues(evt, number) {
     if (currentValue == 0 && number == ".") {
       $("#display").val("0.");
       console.log(". Added!");
+    } else if (
+      currentValue == 0 &&
+      (number == "+" ||
+        number == "-" ||
+        number == "*" ||
+        number == "/" ||
+        number == "%")
+    ) {
+      //in case user enters any operator first
+      $("#display").val("ENTER NUMBER FIRST!");
+      console.log("enter number!");
+      // $("#display").val("0");
     } else {
       $("#display").val(number);
     }
   } else {
-    //for toggling negative number
+    currentValue = $("#display").val();
+    pattern = [0 - 9];
     if (number == "-") {
+      //for toggling negative number
       if (currentValue[0] == "-") {
         newValue = currentValue.slice(1);
         console.log("newVla" + newValue);
@@ -29,12 +44,27 @@ function inputValues(evt, number) {
         newValue = "-" + currentValue;
         console.log("new val" + newValue + "\n current val:" + currentValue);
       }
+    } else if (
+      (currentValue.slice(-1) == "+" ||
+        currentValue.slice(-1) == "-" ||
+        currentValue.slice(-1) == "/" ||
+        currentValue.slice(-1) == "*" ||
+        currentValue.slice(-1) == "%") &&
+      (number == "+" ||
+        number == "-" ||
+        number == "*" ||
+        number == "/" ||
+        number == "%")
+    ) {
+      //e.g, if user enters 5** or 5//       -- this is invalid expression. identiclly it should contain operand1 operator operand 2.
+      //so this block wont allow to perform ay opeartio untill user adds another operand
     } else {
       newValue = currentValue + number;
     }
     $("#display").val(newValue);
   }
   console.log("Value added succesfully!");
+  console.log("current val[last]:" + currentValue.slice(-1));
 }
 
 $(document).ready(function () {
@@ -219,18 +249,35 @@ $(document).ready(function () {
     }
   });
 
-  //percentage click event
-  // $("#percent").on("click", (evt) => {
-  //   evt.preventDefault();
-  //   currentValue = $("#display").val();
-  //   newValue = currentValue;
-  //   $("#display").val(newValue);
-  // });
+  // percentage click event
+  $("#percent").on("click", (evt) => {
+    inputValues(evt, "%");
+  });
 
   // equal to button click event
   $("#equal").on("click", (evt) => {
     evt.preventDefault();
-    var computedValue = eval($("#display").val());
+    currentValue = $("#display").val();
+    var computedValue;
+    if (
+      currentValue.slice(-1) == "+" ||
+      currentValue.slice(-1) == "-" ||
+      currentValue.slice(-1) == "/" ||
+      currentValue.slice(-1) == "*" ||
+      currentValue.slice(-1) == "%"
+    ) {
+      // e.g, if user enters 5* means user is not entering another operand, identiclly it should contain operand1 operator operand 2.
+      // then, this block wont perform any operation and console wont genrate error!
+    } else if ($("#display").val().includes("%")) {
+      console.log("String contains %.");
+      var arr = $("#display").val().split("%");
+      console.log("String contains %." + arr);
+      var op1 = arr[0];
+      var op2 = arr[1];
+      computedValue = (op1 * op2) / 100;
+    } else {
+      computedValue = eval($("#display").val());
+    }
     $("#display").val(computedValue);
   });
 });
